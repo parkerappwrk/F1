@@ -15,5 +15,137 @@ export default StyleSheet.create({
         fontFamily: 'Formula1-Bold',
         color: '#FFF',
         textTransform: 'uppercase'
+    },
+    tabColumView: {
+        paddingBottom: 50,
+        paddingLeft: 15,
+        paddingRight: 10,
+        paddingTop: 20,
+        backgroundColor: '#000',
+        flex: 1,
+        display: 'inline-flex',
+    },
+    driverRow: {
+        borderRadius: 10,
+        marginBottom: 20,
+        display: 'inline-flex',
+        flexDirection: 'column',
+        backgroundColor: '#FFF',
+        padding: 15,
+    },
+    driverInnerBox: {
+        display: 'inline-flex',
+        flexDirection: 'row',
+        flex: 1,
+    },
+    driverInfoBox: {
+        display: 'inline-flex',
+        flexDirection: 'column',
+        flex: 3
+    },
+    driverPointBox: {
+        display: 'inline-flex',
+        flexDirection: 'column',
+        flex: 1,
+        textAlign: 'center',
+        justifyContent: 'center',
+        marginLeft: 'auto'
+    },
+    driverPosition: {
+        fontFamily: 'Formula1-Black',
+        fontSize: 40,
+        color: '#000',
+        marginBottom: 5
+    },
+    driverNameBox: {
+        paddingLeft: 10,
+        flex: 1,
+        borderLeftWidth: 5,
+        borderStyle: 'solid',
+        marginBottom: 5,
+    },
+    constructorNameBox: {
+        paddingLeft: 10,
+        flex: 1,
+        borderLeftWidth: 5,
+        borderStyle: 'solid',
+        display: 'inline-flex',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    driverName: {
+        fontFamily: 'Formula1-Regular',
+        fontSize: 18,
+        color: '#000',
+        display: 'inline-block',
+    },
+    constructorName: {
+        fontFamily: 'Formula1-Regular',
+        fontSize: 18,
+        color: '#000',
+        display: 'inline-block',
+        marginBottom: 0,
+    },
+    familyName: {
+        fontFamily: 'Formula1-Wide',
+        textTransform: 'uppercase',
+        fontSize: 13,
+        color: '#000',
+        marginBottom: 10
+    },
+    driverPoints: {
+        fontFamily: 'Formula1-Regular',
+        fontSize: 25,
+        letterSpacing: 2,
+        textAlign: 'center',
+        color: '#000',
+    },
+    pointsBox: {
+        fontFamily: 'Formula1-Regular',
+        fontSize: 18,
+        color: '#FFF',
+        backgroundColor: '#000',
+        paddingTop: 2,
+        paddingBottom: 2,
+        borderRadius: 5,
+        letterSpacing: 4,
+        textAlign: 'center',
+        display: 'inline-flex',
+        textTransform: 'uppercase'
+    },
+    constructorBox: {
+        borderTopWidth: 1,
+        paddingTop: 10,
+        borderColor: '#B9B9BC',
+        borderStyle: 'solid',
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        display: 'inline-flex',
+        justifyContent: 'space-between'
+    },
+    constructorName: {
+        fontFamily: 'Formula1-Bold',
+        fontSize: 20,
+        color: '#000',
+        display: 'inline-flex',
+        textAlign: 'left',
+        justifyContent: 'flex-start',
+        flex: 2
+    },
+    constructorImgBox: {
+        display: 'inline-flex',
+        textAlign: 'center',
+        justifyContent: 'center',
+        height: 30,
+        width: 30,
+        marginRight: 10,
+    },
+    constructorImg: {
+        height: 30,
+        width: 30,
+        objectFit: 'contain',
+        margin: 'auto'
     }
 });

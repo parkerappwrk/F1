@@ -55,7 +55,6 @@ export default StyleSheet.create({
     TouchMainButton: {
         height: 70,
         width: 70,
-        borderCurve: 'circular',
         marginLeft: 'auto',
         marginTop: 20,
         marginRight: 10,
@@ -71,13 +70,11 @@ export default StyleSheet.create({
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
+        elevation: 15,
         shadowColor: '#EECECC',
+        shadowOffset: {width: -4, height: 4},
+        shadowOpacity: 0.2,
         shadowRadius: 35,
-        shadowOpacity: 0.50,
-        shadowOffset: {
-            width: 30,
-            height: -30,
-        },
     },
     startBtnImg: {
         height: 20,

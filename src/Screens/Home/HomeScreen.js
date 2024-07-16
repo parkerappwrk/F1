@@ -1,5 +1,6 @@
 import { View, StatusBar, Dimensions, Image, Text, TouchableOpacity } from "react-native";
 import HomeStyle from "./HomeStyle";
+import DropShadow from "react-native-drop-shadow";
 
 StatusBar.setHidden(true);
 
@@ -17,9 +18,9 @@ const HomeScreen = ({navigation}) => {
             <Text style={HomeStyle.SubTagLine}>When innovation meets the Ultimate racing thrills</Text>
             <View style={HomeStyle.MainButtonRow}>
                 <TouchableOpacity style={HomeStyle.TouchMainButton} onPress={() => navigation.navigate('Main')}>
-                    <View style={HomeStyle.MainButton}>
+                    <DropShadow style={HomeStyle.MainButton}>
                         <Image style={HomeStyle.startBtnImg} source={require('../../assets/images/next.png')} />
-                    </View>
+                    </DropShadow>
                 </TouchableOpacity>
             </View>
         </View>

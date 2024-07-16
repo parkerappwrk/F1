@@ -1,4 +1,4 @@
-import { Button, View, StatusBar, Dimensions, Image, Text, TouchableOpacity } from "react-native";
+import { View, StatusBar, Dimensions } from "react-native";
 import MainStyle from "./MainStyle";
 import ProfileScreen from "../Profile/ProfileScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

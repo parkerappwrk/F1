@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from "./Screens/Home/HomeScreen";
 import ProfileScreen from "./Screens/Profile/ProfileScreen";
 import MainScreen from './Screens/Main/MainScreen';
-import RaceInfo from './Screens/RaceInfo/RaceInfo';
+import RaceInfoScreen from './Screens/RaceInfo/RaceInfoScreen';
 import DriverInfo from './Screens/DriverInfo/DriverInfo';
 
 const Stack = createNativeStackNavigator();
@@ -23,7 +23,11 @@ const Main = () => {
                     component={MainScreen}
                     options={{headerShown: false}}
                 />
-                <Stack.Screen name="RaceDetails" component={RaceInfo} />
+                <Stack.Screen 
+                    name="RaceDetails"
+                    component={RaceInfoScreen}
+                    options={{headerShown: false}}
+                />
                 <Stack.Screen name="DriverDetails" component={DriverInfo} />
             </Stack.Navigator>
         </NavigationContainer>
