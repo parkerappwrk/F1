@@ -70,11 +70,12 @@ export default StyleSheet.create({
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 15,
+        elevation: 5,
         shadowColor: '#EECECC',
         shadowOffset: {width: -4, height: 4},
         shadowOpacity: 0.2,
         shadowRadius: 35,
+        overflow: 'hidden'
     },
     startBtnImg: {
         height: 20,

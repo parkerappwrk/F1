@@ -4,6 +4,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { useState, useEffect, useMemo } from "react";
 import RaceStyle from './RaceListStyle';
 import { circuitFlags } from '../../constant';
+import { getDateYearNumFormat } from '../../helper';
 
 const UpComingRace = ({data, navigation}) => (
     <View style={RaceStyle.tabColumView}>
@@ -11,11 +12,11 @@ const UpComingRace = ({data, navigation}) => (
             data={data}
             keyExtractor={(item) => item.upcomingRace}
             renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => navigation.navigate('RaceDetails', {curcuitID: item?.Circuit?.circuitId})}>
+                <TouchableOpacity onPress={() => navigation.navigate('RaceDetails', {curcuitID: item})}>
                     <View style={RaceStyle.raceRowBox}>
                         <View style={RaceStyle.RaceDateBox}>
                             <Text style={RaceStyle.roundTitle}>Round {item.round}</Text>
-                            <Text style={RaceStyle.raceDate}>Date: {item.date}</Text>
+                            <Text style={RaceStyle.raceDate}>Date: {getDateYearNumFormat(item.date, 2)}</Text>
                         </View>
                         <View style={RaceStyle.raceCircuitInfo}>
                             <View style={RaceStyle.raceCircuitBox}>
@@ -39,11 +40,11 @@ const PastRace = ({data, navigation}) => (
             data={data}
             keyExtractor={(item) => item.pastRace}
             renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => navigation.navigate('RaceDetails', {curcuitID: item?.Circuit?.circuitId})}>
+                <TouchableOpacity onPress={() => navigation.navigate('RaceDetails', {curcuitID: item})}>
                     <View style={RaceStyle.raceRowBox}>
                         <View style={RaceStyle.RaceDateBox}>
                             <Text style={RaceStyle.roundTitle}>Round {item.round}</Text>
-                            <Text style={RaceStyle.raceDate}>Date: {item.date}</Text>
+                            <Text style={RaceStyle.raceDate}>Date: {getDateYearNumFormat(item.date, 2)}</Text>
                         </View>
                         <View style={RaceStyle.raceCircuitInfo}>
                             <View style={RaceStyle.raceCircuitBox}>
