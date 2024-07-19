@@ -18,7 +18,7 @@ export default StyleSheet.create({
     },
     tabColumView: {
         paddingBottom: 50,
-        paddingLeft: 15,
+        paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 20,
         backgroundColor: '#000',
@@ -36,20 +36,38 @@ export default StyleSheet.create({
     driverInnerBox: {
         display: 'inline-flex',
         flexDirection: 'row',
+        alignItems: 'center',
         flex: 1,
     },
     driverInfoBox: {
         display: 'inline-flex',
         flexDirection: 'column',
+        justifyContent: 'center',
         flex: 3
     },
-    driverPointBox: {
+    driverImageBox: {
         display: 'inline-flex',
         flexDirection: 'column',
         flex: 1,
-        textAlign: 'center',
+    },
+    driverImg: {
+        width: '100%',
+        objectFit: 'contain',
+        height: 100
+    },
+    constructorCarImg: {
+        width: '100%',
+        objectFit: 'contain',
+        height: 60
+    },
+    driverPointBox: {
+        display: 'inline-flex',
+        flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 'auto'
+        marginLeft: 'auto',
+        marginBottom: 10,
+        gap: 5
     },
     driverPosition: {
         fontFamily: 'Formula1-Black',
@@ -59,14 +77,15 @@ export default StyleSheet.create({
     },
     driverNameBox: {
         paddingLeft: 10,
-        flex: 1,
         borderLeftWidth: 5,
         borderStyle: 'solid',
+        display: 'inline-flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
         marginBottom: 5,
     },
     constructorNameBox: {
         paddingLeft: 10,
-        flex: 1,
         borderLeftWidth: 5,
         borderStyle: 'solid',
         display: 'inline-flex',
@@ -94,24 +113,26 @@ export default StyleSheet.create({
         marginBottom: 10
     },
     driverPoints: {
-        fontFamily: 'Formula1-Regular',
-        fontSize: 25,
+        fontFamily: 'Formula1-Bold',
+        fontSize: 18,
         letterSpacing: 2,
         textAlign: 'center',
         color: '#000',
     },
     pointsBox: {
         fontFamily: 'Formula1-Regular',
-        fontSize: 18,
+        fontSize: 12,
         color: '#FFF',
         backgroundColor: '#000',
-        paddingTop: 2,
-        paddingBottom: 2,
-        borderRadius: 5,
-        letterSpacing: 4,
+        paddingTop: 1,
+        paddingBottom: 1,
+        paddingLeft: 2,
+        paddingRight: 2,
+        letterSpacing: 1,
         textAlign: 'center',
         display: 'inline-flex',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        borderRadius: 2,
     },
     constructorBox: {
         borderTopWidth: 1,
@@ -124,6 +145,16 @@ export default StyleSheet.create({
         alignItems: 'center',
         display: 'inline-flex',
         justifyContent: 'space-between'
+    },
+    constructorDriverBox: {
+        borderTopWidth: 1,
+        paddingTop: 10,
+        borderColor: '#B9B9BC',
+        borderStyle: 'solid',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        display: 'inline-flex',
     },
     constructorName: {
         fontFamily: 'Formula1-Bold',
@@ -147,5 +178,53 @@ export default StyleSheet.create({
         width: 30,
         objectFit: 'contain',
         margin: 'auto'
+    },
+    constructorDriver: {
+        fontFamily: 'Formula1-Regular',
+        color: '#000',
+        fontSize: 12,
+    },
+    raceRowContainer: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor: '#FFF',
+        marginBottom: 20,
+    },
+    raceLocationRow: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        gap: 10,
+        marginBottom: 5,
+    },
+    raceWinnerRow: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 10,
+        flexDirection: 'row',
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
+    raceCountryFlag: {
+        height: 40,
+        width: 50,
+        objectFit: 'contain'
+    },
+    contryName: {
+        fontFamily: 'Formula1-Regular',
+        fontSize: 14,
+        color: '#000'
+    },
+    raceName: {
+        fontFamily: 'Formula1-Bold',
+        fontSize: 20,
+        color: '#000',
+        display: 'inline-block',
+        marginBottom: 5,
+    },
+    winnername: {
+        color: '#000',
+        fontSize: 15,
+        fontFamily: 'Formula1-Bold',
     }
 });

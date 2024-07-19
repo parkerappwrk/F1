@@ -77,3 +77,40 @@ export const circuitImages = {
     losail: require('./assets/images/circuits/Qatar_Circuit.png'),
     yas_marina: require('./assets/images/circuits/Abu_Dhabi_Circuit.png'),
 };
+
+export const DriverImages = {
+    albon: require('./assets/images/drivers/albon.png'),
+    alonso: require('./assets/images/drivers/alonso.png'),
+    bearman: require('./assets/images/drivers/bearman.png'),
+    bottas: require('./assets/images/drivers/bottas.png'),
+    gasly: require('./assets/images/drivers/gasly.png'),
+    hamilton: require('./assets/images/drivers/hamilton.png'),
+    hulkenberg: require('./assets/images/drivers/hulkenberg.png'),
+    kevin_magnussen: require('./assets/images/drivers/kevin_magnussen.png'),
+    leclerc: require('./assets/images/drivers/leclerc.png'),
+    max_verstappen: require('./assets/images/drivers/max_verstappen.png'),
+    norris: require('./assets/images/drivers/norris.png'),
+    ocon: require('./assets/images/drivers/ocon.png'),
+    perez: require('./assets/images/drivers/perez.png'),
+    piastri: require('./assets/images/drivers/piastri.png'),
+    ricciardo: require('./assets/images/drivers/ricciardo.png'),
+    russell: require('./assets/images/drivers/russell.png'),
+    sainz: require('./assets/images/drivers/sainz.png'),
+    sargeant: require('./assets/images/drivers/sargeant.png'),
+    stroll: require('./assets/images/drivers/stroll.png'),
+    tsunoda: require('./assets/images/drivers/tsunoda.png'),
+    zhou: require('./assets/images/drivers/zhou.png'),
+}
+
+export const constructorCars = {
+    aston_martin: require('./assets/images/cars/aston-martin.png'),
+    ferrari: require('./assets/images/cars/ferrari.png'),
+    mercedes: require('./assets/images/cars/mercedes.png'),
+    alpine: require('./assets/images/cars/alpine.png'),
+    haas: require('./assets/images/cars/haas.png'),
+    mclaren: require('./assets/images/cars/mclaren.png'),
+    rb: require('./assets/images/cars/rb.png'),
+    red_bull: require('./assets/images/cars/red-bull-racing.png'),
+    sauber: require('./assets/images/cars/kick-sauber.png'),
+    williams: require('./assets/images/cars/williams.png'),
+};

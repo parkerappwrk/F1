@@ -4,7 +4,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { useState, useEffect, useMemo } from "react";
 import RaceStyle from './RaceListStyle';
 import { circuitFlags } from '../../constant';
-import { getDateYearNumFormat } from '../../helper';
+import { getDateYearNumFormat, getNewRandom } from '../../helper';
 
 const UpComingRace = ({data, navigation}) => (
     <View style={RaceStyle.tabColumView}>
@@ -72,7 +72,6 @@ const RaceList = ({navigation}) => {
     if(date < 10){
         date = '0'+date;
     }
-    let AllRandomArr = [];
     const currentDate = new Date().getFullYear()+'-'+month+'-'+date;
     const layout = useWindowDimensions();
     const [index, setIndex] = useState(0);
@@ -90,7 +89,7 @@ const RaceList = ({navigation}) => {
         past: () => <PastRace data={pastRaceList} navigation={navigation} />,
     });
 
-    
+    let AllRandomArr = [];
     const getNewRandom = () => {
         let getRandom = Math.floor(Math.random() * 5000);
         if(AllRandomArr.indexOf(getRandom) > -1){
