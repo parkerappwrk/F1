@@ -1,7 +1,7 @@
 import React from 'react';
-import { Alert, Dimensions, FlatList, Image, Text, View, useWindowDimensions  } from "react-native";
+import { Alert, Dimensions, FlatList, Image, Text, TouchableOpacity, View, useWindowDimensions  } from "react-native";
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import StandingsStyle from './StandingsStyle';
 import { constructorImages, constructorColor, DriverImages, constructorCars, circuitFlags } from '../../constant';
 
@@ -74,30 +74,41 @@ const Constructors = ({data}) => (
     </View>
 );
   
-const RaceResult = ({data}) => (
+const RaceResult = ({data, navigation}) => (
     <View style={StandingsStyle.tabColumView}>
         <FlatList
             data={data}
             keyExtractor={(item) => item?.raceSeason}
             renderItem={({ item }) => (
-                <View style={StandingsStyle.raceRowContainer}>
-                    <View style={StandingsStyle.raceLocationRow}>
-                        <Image style={StandingsStyle.raceCountryFlag} source={circuitFlags[item?.curcuitInfo?.Circuit?.circuitId]} />
-                        <Text style={StandingsStyle.contryName}>{item?.curcuitInfo?.Circuit.Location.country}</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('RaceResult', {results: item})}>
+                    <View style={StandingsStyle.raceRowContainer}>
+                        <View style={StandingsStyle.raceLocationRow}>
+                            <Image style={StandingsStyle.raceCountryFlag} source={circuitFlags[item?.curcuitInfo?.Circuit?.circuitId]} />
+                            <Text style={StandingsStyle.contryName}>{item?.curcuitInfo?.Circuit.Location.country}</Text>
+                        </View>
+                        <Text style={StandingsStyle.raceName}>{item?.curcuitInfo?.raceName}</Text>
+                        <View style={StandingsStyle.raceWinnerRow}>
+                            <View style={StandingsStyle.racePodiumBox}>
+                                <Image style={StandingsStyle.driverOther} source={DriverImages[item[1]?.Driver?.driverId]} />
+                                <Text style={{...StandingsStyle.winnername, borderLeftColor:constructorColor[item[1].Constructor.constructorId]}}>{item[1].Driver.code}</Text>
+                            </View>
+                            <View style={StandingsStyle.racePodiumBox}>
+                                <Image style={StandingsStyle.driverFirst} source={DriverImages[item[0]?.Driver?.driverId]} />
+                                <Text style={{...StandingsStyle.winnername, borderLeftColor:constructorColor[item[0].Constructor.constructorId]}}>{item[0].Driver.code}</Text>
+                            </View>
+                            <View style={StandingsStyle.racePodiumBox}>
+                                <Image style={StandingsStyle.driverOther} source={DriverImages[item[2]?.Driver?.driverId]} />
+                                <Text style={{...StandingsStyle.winnername, borderLeftColor:constructorColor[item[2].Constructor.constructorId]}}>{item[2].Driver.code}</Text>
+                            </View>
+                        </View>
                     </View>
-                    <Text style={StandingsStyle.raceName}>{item?.curcuitInfo?.raceName}</Text>
-                    <View style={StandingsStyle.raceWinnerRow}>
-                        <Text style={StandingsStyle.winnername}>{item[0].Driver.code}</Text>
-                        <Text style={StandingsStyle.winnername}>{item[1].Driver.code}</Text>
-                        <Text style={StandingsStyle.winnername}>{item[2].Driver.code}</Text>
-                    </View>
-                </View>
+                </TouchableOpacity>
             )}
         />
     </View>
 );
 
-const Standings = () => {
+const Standings = ({navigation}) => {
     let allDriverJSON = [];
     const currentYear = new Date().getFullYear();
     let month = new Date().getMonth() + 1;
@@ -115,7 +126,7 @@ const Standings = () => {
     const [constructorsStandings, setConstructorsStandings] = useState([]);
     const [resultStandings, setResultStandings] = useState([]);
     const [allRaceData, setAllRaceData] = useState([]);
-    const [allRaceCount, setAllRaceCount] = useState('');
+    const [allRaceCount, setAllRaceCount] = useState(0);
     const [routes] = useState([
         { key: 'drivers', title: 'Drivers' },
         { key: 'constructors', title: 'Constructors' },
@@ -134,12 +145,17 @@ const Standings = () => {
         }
     }
 
-    const getRaceList = () => {
-        fetch('https://ergast.com/api/f1/'+currentYear+'.json').then(response => response.json()).then(data => {
-            setAllRaceData(data.MRData.RaceTable.Races);
-        }).catch(error => {
-            
-        });
+    const getRaceList = async () => {
+        try {
+            const response = await fetch(`https://ergast.com/api/f1/${currentYear}.json`);
+            const data = await response.json();
+            const raceCircuits = data.MRData.RaceTable.Races;
+            setAllRaceData(raceCircuits);
+            getDriverStandings();
+        } catch (error) {
+            Alert.alert("Error", `Failed to fetch results for race`);
+            getDriverStandings();
+        }
     }
 
     const getDriverStandings = () => {
@@ -170,48 +186,50 @@ const Standings = () => {
         });
     }
 
+    const getRaceResults = async (race, allRaceData) => {
+        try {
+            const response = await fetch(`https://ergast.com/api/f1/${currentYear}/${race}/results.json`);
+            const data = await response.json();
+            const raceResult = data.MRData.RaceTable.Races[0].Results;
+            raceResult.raceSeason = race;
+            raceResult.curcuitInfo = allRaceData[race - 1];
+            return raceResult;
+        } catch (error) {
+            Alert.alert("Error", `Failed to fetch results for race ${race}`);
+            return null;
+        }
+    }
+
+    const storeRaceResults = async (raceCount) => {
+        const results = [];
+        for (let race = 1; race <= raceCount; race++) {
+            const result = await getRaceResults(race, allRaceData);
+            if (result) results.push(result);
+        }
+        setResultStandings(results);
+    }
+
+    const memoizedResultStandings = useMemo(() => resultStandings, [resultStandings]);
+
     const renderScene = SceneMap({
         drivers: () => <Drivers data={driverStandings} />,
         constructors: () => <Constructors data={constructorsStandings} />,
-        raceresult: () => <RaceResult data={resultStandings} />,
+        raceresult: () => <RaceResult data={memoizedResultStandings} navigation={navigation} />,
     });
 
-    let race = 1;
-    const storeRaceResult = () => {
-        fetch('http://ergast.com/api/f1/2024/'+race+'/results.json')
-        .then(response => response.json())
-        .then(data => {
-            let raceResult = data.MRData.RaceTable.Races[0].Results;
-            raceResult.raceSeason = getNewRandom();
-            raceResult.curcuitInfo = allRaceData[race - 1];
-            setResultStandings((prev) => [...prev, raceResult]);
-            race++;
-            if(race <= allRaceCount){
-                storeRaceResult();
-            }
-        })
-        .catch(error => {
-            Alert.alert("Error", "Failed to fetch race Results");
-        });
-    }
-
     useEffect(() => {
-        if(allRaceCount.length){
-            storeRaceResult();
-        }
-    }, [allRaceCount]);
-
-    useEffect(() => {
+        setResultStandings([]);
         if(allRaceData.length){
-            let i = 0;
-            allRaceData.map((item) => {
-                if(currentDate > item.date){
-                    i++;
-                }
-            });
-            setAllRaceCount(i);
+            const completedRaces = allRaceData.filter(race => new Date(race.date) <= new Date()).length;
+            setAllRaceCount(completedRaces);
         }
     }, [allRaceData]);
+
+    useEffect(() => {
+        if(allRaceCount > 0){
+            storeRaceResults(allRaceCount);
+        }
+    }, [allRaceCount]);
 
     useEffect(() => {
         setResultStandings([]);
@@ -219,7 +237,6 @@ const Standings = () => {
         setDriverStandings([])
         setConstructorsStandings([]);
         getRaceList();
-        getDriverStandings();
     }, []);
 
     return (

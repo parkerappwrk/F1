@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Dimensions, FlatList, Image, ScrollView, Text, View } from "react-native";
+import { Alert, Dimensions, FlatList, Image, Text, View } from "react-native";
 import NewsStyle from "./NewsStyle";
 import { getDateYearNumFormat } from "../../helper";
+import { LiveNews } from "../../LiveNews";
 
 const News = () => {
     const { width, height } = Dimensions.get('window');
-    const [newsData, setNewsData] = useState([]);
+    const [newsData, setNewsData] = useState(LiveNews.results);
 
     useEffect(() => {
         // fetch('https://newsdata.io/api/1/news?apikey=pub_48768ff48d07326f7e7656883f7e8d0a5443b&q=Formula%201&language=en&category=sports').then(response => response.json()).then(data => {
@@ -26,9 +27,9 @@ const News = () => {
                     keyExtractor={(item) => item.article_id}
                     renderItem={({ item }) => (
                         <View style={NewsStyle.newsBlock}>
-                            {item.image_url !== null && item.image_url !== 'null' && item.image_url !== '' ? (
+                            {item.image_url && item.image_url !== 'null' ? (
                                 <View style={NewsStyle.newsImageBox}>
-                                    <Image style={NewsStyle.newsImageBanner} resizeMode="cover" source={{url: item.image_url}} />
+                                    <Image style={NewsStyle.newsImageBanner} source={{uri: item.image_url}} onError={(e) => Alert.alert('Image loading error: ', e.nativeEvent.error)}/>
                                 </View>
                             ) : null }
                             <Text style={NewsStyle.newsdate}>{getDateYearNumFormat(item.pubDate, 1)}</Text>

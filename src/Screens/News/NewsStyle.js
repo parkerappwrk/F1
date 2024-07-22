@@ -38,14 +38,14 @@ export default StyleSheet.create({
     },
     newsImageBox: {
         height: 200,
-        width: '100%',
-        display: 'flex',
+        display: 'inline-flex',
+        flexDirection: 'row',
+        flex: 1,
     },
     newsImageBanner: {
         height: 200,
-        objectFit: 'contain',
         width: '100%',
-        display: 'inline-block'
+        display: 'inline-flex',
     },
     newsTitle: {
         marginTop: 10,
